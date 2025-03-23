@@ -3,5 +3,51 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
+    "ngx-qp": {
+      "projectType": "library",
+      "root": "projects/ngx-qp",
+      "sourceRoot": "projects/ngx-qp/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/ngx-qp/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/ngx-qp/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/ngx-qp/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        }
+      },
+      "schematics": {
+        "@schematics/angular:component": {
+          "skipTests": true
+        },
+        "@schematics/angular:directive": {
+          "skipTests": true
+        },
+        "@schematics/angular:service": {
+          "skipTests": true
+        },
+        "@schematics/angular:pipe": {
+          "skipTests": true
+        },
+        "@schematics/angular:class": {
+          "skipTests": true
+        },
+        "@schematics/angular:guard": {
+          "skipTests": true
+        },
+        "@schematics/angular:resolver": {
+          "skipTests": true
+        }
+      }
+    }
   }
 }
