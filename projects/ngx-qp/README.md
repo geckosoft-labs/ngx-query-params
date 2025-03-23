@@ -1,63 +1,143 @@
-# NgxQueryParams
+# ngx-qp
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.0.
+Reactive and type-safe query parameter management using **Angular Signals**.
 
-## Code scaffolding
+> 🔁 Two-way binding between URL query parameters and application state, powered by Angular’s modern reactivity model.
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+---
 
+## 🚀 Features
+
+- ✅ **Auto-synced signals** from query parameters
+- ✅ **Two-way binding**: update signals → update URL
+- ✅ Works with primitive types, arrays, booleans, numbers, enums, and more
+- ✅ **Fully tree-shakable**, Angular-native
+- ✅ Zero extra dependencies
+
+---
+
+## 📦 Installation
+
+Using NPM:
 ```bash
-ng generate component component-name
+npm install ngx-qp
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
+Using YARN:
 ```bash
-ng generate --help
+yarn add ngx-qp
 ```
 
-## Building
+---
 
-To build the library, run:
+## 🧩 Setup
 
-```bash
-ng build ngx-qp
+Ensure your app uses Angular's **Signals** (Angular v16+).
+
+No special setup needed—just import and use in any Angular component or service.
+
+---
+
+## 🧪 Usage
+
+### Bind a number param:
+
+```ts
+import { qpNum } from 'ngx-qp';
+
+@Component({ ... })
+export class MyComponent {
+  page = qpNum('page', 1); // ?page=1
+
+  nextPage() {
+    this.page.set(this.page() + 1);
+  }
+}
 ```
 
-This command will compile your project, and the build artifacts will be placed in the `dist/` directory.
+### Bind a boolean param:
 
-### Publishing the Library
-
-Once the project is built, you can publish your library by following these steps:
-
-1. Navigate to the `dist` directory:
-   ```bash
-   cd dist/ngx-qp
-   ```
-
-2. Run the `npm publish` command to publish your library to the npm registry:
-   ```bash
-   npm publish
-   ```
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
+```ts
+toggle = qpBool('debug', false); // ?debug=true
 ```
 
-## Running end-to-end tests
+### Bind a string param:
 
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
+```ts
+filter = qp('filter', 'all'); // ?filter=all
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+### Optional single param:
 
-## Additional Resources
+```ts
+sort = qp('sort'); // string | undefined
+```
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+### Enum-like casting:
+
+```ts
+type Tab = 'home' | 'profile' | 'settings';
+tab = qpCast1<Tab>('tab', 'home'); // ?tab=home
+```
+
+### Multi-value param:
+
+```ts
+tags = qpMapN('tag', (x) => x.toLowerCase()); // ?tag=a&tag=b
+```
+
+---
+
+## 🧠 How It Works
+
+- Hooks into Angular Router's `ActivatedRoute` and `queryParamMap`
+- Syncs with `WritableSignal<T>`
+- A global `QueryParamsService` batches and updates the URL when any param changes
+
+---
+
+## 📦 API Reference
+
+### Signals
+
+| Function         | Type                                    | Description                         |
+|------------------|-----------------------------------------|-------------------------------------|
+| `qp()`           | `WritableSignal<string \| undefined>`   | String param                        |
+| `qpNum()`        | `WritableSignal<number \| undefined>`   | Number param                        |
+| `qpBool()`       | `WritableSignal<boolean \| undefined>`  | Boolean param                       |
+| `qpCast1<T>()`   | `WritableSignal<T \| undefined>`        | Cast to enum/union type             |
+| `qpMapN()`       | `WritableSignal<T[]>`                   | Multi-value param with mapping      |
+| `qpMap1()`       | `WritableSignal<T \| undefined>`        | Generic one-value mapper            |
+
+---
+
+## 🔧 Advanced
+
+You can inject `QueryParamsService` to manually batch or set multiple parameters:
+
+```ts
+constructor(private readonly qps: QueryParamsService) {}
+
+applyFilters() {
+  this.qps.set('filter', 'recent');
+  this.qps.set('limit', 20);
+}
+```
+
+---
+
+## 🧼 Cleanup
+
+No need to manually unsubscribe—internally handles `onDestroy()` and signal disposal.
+
+---
+
+## 📜 License
+
+MIT
+
+---
+
+## 💬 Feedback / Contributions
+
+Issues and PRs welcome!
