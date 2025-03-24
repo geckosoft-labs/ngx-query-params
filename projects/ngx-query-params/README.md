@@ -32,7 +32,7 @@ yarn add @geckosoft/ngx-query-params
 
 ## 🧩 Setup
 
-Ensure your app uses Angular's **Signals** (Angular v16+).
+Ensure your app uses Angular's **Signals** (Angular v17+).
 
 No special setup needed—just import and use in any Angular component or service.
 
