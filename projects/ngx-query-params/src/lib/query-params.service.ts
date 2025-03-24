@@ -1,7 +1,7 @@
 import { DestroyRef, Injectable, WritableSignal, effect, inject, signal } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 
-export const equal = (a: unknown, b: unknown): boolean => {
+const equal = (a: unknown, b: unknown): boolean => {
   const aArray = Array.isArray(a);
   const bArray = Array.isArray(b);
 
@@ -30,35 +30,35 @@ export const qpMap = <T>(key: string, f: (x: string[]) => T) => {
   return r;
 };
 
-export function qpMap1<T>(key: string, f: (x: string) => T): WritableSignal<T | undefined>;
 export function qpMap1<T>(key: string, f: (x: string) => T, defaultValue: T): WritableSignal<T>;
+export function qpMap1<T>(key: string, f: (x: string) => T, defaultValue?: T): WritableSignal<T | undefined>;
 export function qpMap1<T>(key: string, f: (x: string) => T, defaultValue?: T) {
   return qpMap(key, (values) => (values.length === 1 ? f(values[0]) : defaultValue));
 }
 
-export function qp(key: string): WritableSignal<string | undefined>;
 export function qp(key: string, defaultValue: string): WritableSignal<string>;
+export function qp(key: string, defaultValue?: string): WritableSignal<string | undefined>;
 export function qp(key: string, defaultValue?: string) {
   return qpMap1(key, (x) => x, defaultValue);
 }
 
-export function qpNum(key: string): WritableSignal<number | undefined>;
 export function qpNum(key: string, defaultValue: number): WritableSignal<number>;
+export function qpNum(key: string, defaultValue?: number): WritableSignal<number | undefined>;
 export function qpNum(key: string, defaultValue?: number) {
   return qpMap1(key, (x) => +x, defaultValue);
 }
 
 
-export function qpBool(key: string): WritableSignal<boolean | undefined>;
 export function qpBool(key: string, defaultValue: boolean): WritableSignal<boolean>;
+export function qpBool(key: string, defaultValue?: boolean): WritableSignal<boolean | undefined>;
 export function qpBool(key: string, defaultValue?: boolean) {
   return qpMap1(key, (x) => x === 'true', defaultValue);
 }
 
 export const qpMapN = <T>(key: string, f: (x: string) => T) => qpMap(key, (values) => values.map(f));
 
-export function qpCast1<T extends string>(key: string): WritableSignal<T | undefined>;
 export function qpCast1<T extends string>(key: string, defaultValue: T): WritableSignal<T>;
+export function qpCast1<T extends string>(key: string, defaultValue?: T): WritableSignal<T | undefined>;
 export function qpCast1<T extends string>(key: string, defaultValue?: T) {
   return qpMap1(key, (x) => x as T, defaultValue);
 }
@@ -78,7 +78,6 @@ export class QueryParamsService {
     effect(() => {
       const queryParams = this.mapSignal();
       if (queryParams !== emptyQp) {
-        console.log('Navigate to query', queryParams);
         this.mapSignal.set(emptyQp);
         void this.router.navigate([], {
           queryParams,
