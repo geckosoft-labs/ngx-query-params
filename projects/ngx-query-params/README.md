@@ -1,4 +1,4 @@
-# ngx-qp
+# ngx-query-params
 
 Reactive and type-safe query parameter management using **Angular Signals**.
 
@@ -20,12 +20,12 @@ Reactive and type-safe query parameter management using **Angular Signals**.
 
 Using NPM:
 ```bash
-npm install ngx-qp
+npm install @geckosoft/ngx-query-params
 ```
 
 Using YARN:
 ```bash
-yarn add ngx-qp
+yarn add @geckosoft/ngx-query-params
 ```
 
 ---
@@ -43,9 +43,18 @@ No special setup needed—just import and use in any Angular component or servic
 ### Bind a number param:
 
 ```ts
-import { qpNum } from 'ngx-qp';
+import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { qpNum } from '@geckosoft/ngx-query-params';
 
-@Component({ ... })
+@Component({
+  selector: ...,
+  imports: [FormsModule],
+  template: `
+    <input type="number" [(ngModel)]="page">
+    <button (click)="nextPage()">Next Page</button>
+  `,
+})
 export class MyComponent {
   page = qpNum('page', 1); // ?page=1
 

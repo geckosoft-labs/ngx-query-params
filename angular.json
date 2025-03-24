@@ -3,23 +3,23 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "ngx-qp": {
+    "ngx-query-params": {
       "projectType": "library",
-      "root": "projects/ngx-qp",
-      "sourceRoot": "projects/ngx-qp/src",
+      "root": "projects/ngx-query-params",
+      "sourceRoot": "projects/ngx-query-params/src",
       "prefix": "lib",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
-            "project": "projects/ngx-qp/ng-package.json"
+            "project": "projects/ngx-query-params/ng-package.json"
           },
           "configurations": {
             "production": {
-              "tsConfig": "projects/ngx-qp/tsconfig.lib.prod.json"
+              "tsConfig": "projects/ngx-query-params/tsconfig.lib.prod.json"
             },
             "development": {
-              "tsConfig": "projects/ngx-qp/tsconfig.lib.json"
+              "tsConfig": "projects/ngx-query-params/tsconfig.lib.json"
             }
           },
           "defaultConfiguration": "production"

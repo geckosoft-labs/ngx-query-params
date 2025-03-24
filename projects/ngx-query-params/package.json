@@ -1,0 +1,15 @@
+{
+  "name": "@geckosoft/ngx-query-params",
+  "version": "0.0.5",
+  "type": "module",
+  "peerDependencies": {
+    "@angular/common": "^19.2.0",
+    "@angular/core": "^19.2.0"
+  },
+  "dependencies": {
+    "tslib": "^2.3.0"
+  },
+  "sideEffects": false,
+  "author": "Geckosoft",
+  "license": "MIT"
+}

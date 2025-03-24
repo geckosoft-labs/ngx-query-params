@@ -1,5 +1,5 @@
 {
-  "name": "ngx-qp",
+  "name": "ngx-query-params",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",

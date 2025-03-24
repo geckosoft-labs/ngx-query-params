@@ -10,8 +10,8 @@
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "paths": {
-      "ngx-qp": [
-        "./dist/ngx-qp"
+      "ngx-query-params": [
+        "./dist/ngx-query-params"
       ]
     },
     "skipLibCheck": true,
