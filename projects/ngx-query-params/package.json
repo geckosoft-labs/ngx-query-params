@@ -1,6 +1,6 @@
 {
   "name": "@geckosoft/ngx-query-params",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "type": "module",
   "peerDependencies": {
     "@angular/core": ">= 17 < 21",
